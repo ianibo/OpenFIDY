@@ -8,12 +8,13 @@ class AdminController {
     // Import security bean
     def springSecurityService
 
-    @Secured(['admin', 'IS_AUTHENTICATED_FULLY'])
+    @Secured(["hasRole('admin')", "hasRole('IS_AUTHENTICATED_FULLY')"])
     def index = { 
       def current_user = currentUser();
     }
 
     def currentUser() {
+      println("get current user ${springSecurityService.principal.id}")
       AppUser.get(springSecurityService.principal.id);
     }
 }

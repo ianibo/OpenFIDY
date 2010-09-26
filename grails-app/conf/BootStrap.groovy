@@ -18,9 +18,9 @@ class BootStrap {
         println "Admin user: ${admin_user}"
         println "fidy user: ${fidy_user}"
 
-        UserRole.create admin_user, admin_role
-        UserRole.create admin_user, user_role
-        UserRole.create fidy_user, user_role
+        AppUserAppRole.create admin_user, admin_role
+        AppUserAppRole.create admin_user, user_role
+        AppUserAppRole.create fidy_user, user_role
     }
     def destroy = {
     }
