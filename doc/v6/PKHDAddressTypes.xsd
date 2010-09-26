@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - Designer Edition 7.0.5.906 (http://www.liquid-technologies.com)-->
+<xsd:schema xmlns="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" version="0.1" id="ISPPAddressTypes_3" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="AddressTypes-v2-0.xsd" />
+  <xsd:include schemaLocation="ContactTypes-v1-3.xsd" />
+</xsd:schema>

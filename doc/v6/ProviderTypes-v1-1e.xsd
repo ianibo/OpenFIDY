@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - Designer Edition 7.0.5.906 (http://www.liquid-technologies.com)-->
+<!-- 
+Modified: 30/01/2006 - Zoë Colburn (Opportunity Links)
+	Initial draft version
+
+Modified: 25/07/2006 - Rob Moran (Opportunity Links)
+	Added description details to all elements and attributes
+	Changed TotalVacancies type from a boolean to an integer
+
+Modified: Provider Types Schema extended to cover Section 12 requirements of the Childcare Act 2006 as part of the ISPP project
+embracing standards initially incorporated by Opportunity Links 
+
+Modified: 20/03/2008 - Hubert Matthews (DCSF)
+    Extended to cover Section 12 requirements of the Childcare Act 2006 as part of the ISPP project
+
+Modified: 14/07/2008 - Jonathan Tulley (DCSF)
+    Extended to cover Section 12 requirements of the Childcare Act 2006 as part of the ISPP project
+
+Modified: 16/12/2008 - Andy Kerner (Tribal)
+  Amending Schema to correct ContactTypes TelephoneStructure issues
+  
+Modified: 08/01/2009 - Rob Graveley (Tribal)
+  Amending id and conceptid attribute in controlledliststructure to string datatype
+
+Modified: 02/09/2009 - Rob Graveley (Tribal)
+	Dc.identifier made mandatory
+	ContactForCosts made attribute of Costs 
+	ContactForVacancies made attribute of FurtureVacancyDetails 
+	HasProvision added as attribute of SpecialNeeds
+	FormatType restricted to plain text only
+	
+Modified: 09/03/2009 - Rob Graveley (Tribal)
+	DescriptionStructure introduced to allow for multiple description text formats whilst ensuring that at least one description will be of plain text
+	LinkedRegistration made optional
+	QualityAssurance element node addded
+	FromOfsted boolean element added
+	OfstedURN element added
+	PostcodeOutcode element added
+	
+Modified: 21/09/2009 - Rob Graveley (Tribal)
+	Cardinality of the following elements relaxed:  Changed from Mandatory to Optional.  
+	TelephoneNumber
+	PostalAddress
+	ProvisionType
+	LastInpsection
+	WelfareNoticeHistoryList
+  
+-->
+<xs:schema xmlns:lg="http://www.esd.org.uk/standards" xmlns="http://dcsf.gov.uk/XMLSchema/Childcare" xmlns:apd="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://dcsf.gov.uk/XMLSchema/Childcare" version="1.1e" id="ProviderTypes-v1-1e" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="PKHDAddressTypes.xsd" namespace="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" />
+  <xs:import schemaLocation="MetadataElement-v1.0.xsd" namespace="http://www.esd.org.uk/standards" />
+  <xs:annotation>
+    <xs:documentation>Childcare provider data schema (initially developed by Opportunity Links and extended by DCSF) for passing structured childcare provider information</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation>Modified to cater for the requirements of Section 12 of the Childcare Act 2006</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:appinfo>
+			<Metadata xmlns="http://www.govtalk.gov.uk/metadata/egms">
+				<DC.Creator Href="mailto:parent.know-how@dcsf.gsi.gov.uk">DCSF</DC.Creator>
+				<DC.Date.Created Scheme="DCTERMS.W3CDTF">2006-07-06</DC.Date.Created>
+				<DC.Date.Modified Scheme="DCTERMS.W3CDTF">2009-09-03</DC.Date.Modified>
+				<DC.Description>Provider Types</DC.Description>
+				<DC.Format Scheme="http://www.iana.org/assignments/media-types/">text/xml</DC.Format>
+				<DC.Identifier Scheme="DCTERMS.URI">http://dcsf.gov.uk/XMLSchema/Childcare/ProviderTypes-v1-1e.xsd</DC.Identifier>
+				<DC.Language Scheme="DCTERMS.ISO639-2">eng</DC.Language>
+				<DC.Publisher Href="mailto:parent.know-how@dcsf.gsi.gov.uk">DCSF</DC.Publisher>
+				<DC.Relation.ConformsTo>http://www.w3.org/2001/XMLSchema</DC.Relation.ConformsTo>
+				<DC.Subject Scheme="eGMS.IPSV">Information and communication, Information management; Service Information</DC.Subject>
+				<DC.Title>Provider Types </DC.Title>
+				<DC.Type scheme="eGMS.TES">XML Schema</DC.Type>
+				<DC.Contributor>Jonathan Tulley</DC.Contributor>
+				<eGMS.Category codeListID="GCL">People, communities and living; Childcare Information</eGMS.Category>
+				<eGMS.Category codeListID="eGMS.IPSV">Care; Childcare Information</eGMS.Category>
+				<eGMS.Copyright>DCSF 2008</eGMS.Copyright>
+				<eGMS.Project>ISPP</eGMS.Project>
+				<eGMS.Status>version 1-1e</eGMS.Status>
+			</Metadata>
+		</xs:appinfo>
+    <xs:documentation>The following external schemas are referenced (imported) by this schema and can be found on the GovTalk website - http://www.govtalk.gov.uk/
+These schemas may require further referenced schemas to function correctly, but will also be available on the GovTalk website.
+		</xs:documentation>
+  </xs:annotation>
+  <!--======================================-->
+  <!--Top level type-->
+  <!--======================================-->
+  <xs:element name="ProviderDescription" type="ProviderStructure" />
+  <xs:complexType name="ProviderStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for childcare provider details and associated metadata</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:group ref="eGMSGroup">
+        <xs:annotation>
+          <xs:documentation>eGMS Metatdata</xs:documentation>
+        </xs:annotation>
+      </xs:group>
+      <xs:element name="ProviderDetails" type="ProviderDetailStructure">
+        <xs:annotation>
+          <xs:documentation>Data on a single provision of childcare</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!--======================================-->
+  <xs:complexType name="ProviderDetailStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for childcare provider details</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ProviderName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The name of the provider</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ConsentVisibleAddress" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Does the provider consent to have physical address details published</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="SettingDetails" type="ContactInformationStructure">
+        <xs:annotation>
+          <xs:documentation>Setting of the childcare</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ContactDetails" type="ContactInformationStructure">
+        <xs:annotation>
+          <xs:documentation>Contact details for the provider if different from the setting details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ChildcareType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Details of the childcare types of the provider. An open field to be provided by the Local Authority</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProvisionType" type="ProvisionTypeType">
+        <xs:annotation>
+          <xs:documentation>Type of childcare provided</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ChildcareAges" type="ChildcareAgeListStructure">
+        <xs:annotation>
+          <xs:documentation>Age range information the provider caters for.
+This field is intended to be used by both registered and non-registered providers, thus it does not structure the information around the registration types like the Ofsted schema. Also the child number limits are optional.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ChildcarePeriods" type="ChildcarePeriodListStructure">
+        <xs:annotation>
+          <xs:documentation>Broad period of provision. from Ofsted. e.g. 'Before school'</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ChildcareTimes">
+        <xs:annotation>
+          <xs:documentation>Optional details outlining the times and duration of the care the provided. From the Local Authority.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Times" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Opening times of the provider. e.g. 9-5:30 mon-fri</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="OtherHours" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Further hours provider is available</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Availability" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Types of time provider is available. e.g. term-time or working hours</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="TimesOfFundedPlaces">
+        <xs:annotation>
+          <xs:documentation>Optional information specifying when the provider offers funded places</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Times" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Opening times of the provider. e.g. 9-5:30 mon-fri</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="OtherHours" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Further hours provider is available</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Availability" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Types of time provider is available. e.g. term-time or working hours</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="CostDetails">
+        <xs:annotation>
+          <xs:documentation>Optional details about the provider's costs</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Costs" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Details outlining the cost information for the provider</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="OtherCosts" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Additional information related to costs. e.g. discounts</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="ContactForCosts" type="xs:boolean" use="required" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Pickups">
+        <xs:annotation>
+          <xs:documentation>Optional details about whether the provider offers a pick up service for children</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SchoolList" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Optional details outlining a list of schools the provider is willing to pick up from</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Details" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Optional further details about the pick up service offered by the provider</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="HasProvision" type="xs:boolean" use="required">
+            <xs:annotation>
+              <xs:documentation>Flag specifying whether the provider picks up children</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="FutureVacancyDetails">
+        <xs:annotation>
+          <xs:documentation>Optional details about the provider's future vacancies</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="VacancyInformation" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Details about the vacancies available at the provision (both current and upcoming)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="TotalVacancies" type="xs:int">
+              <xs:annotation>
+                <xs:documentation>The total number of vacancies (both current and upcoming) of the provider</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="ContactForVacancies" type="xs:boolean" use="required" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="SpecialProvisions">
+        <xs:annotation>
+          <xs:documentation>Optional information about specific special provisions offered by the provider</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SpecialNeeds">
+              <xs:annotation>
+                <xs:documentation>Information about special needs catered for by the provider</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="Experience" type="xs:string">
+                    <xs:annotation>
+                      <xs:documentation>Details of any experience the provider has working with children with special needs</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="Confidence" type="xs:string">
+                    <xs:annotation>
+                      <xs:documentation>Details about the confidence the provider has working with children with special needs</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="Details" type="xs:string">
+                    <xs:annotation>
+                      <xs:documentation>Details about special needs provision of the provider</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attribute name="HasProvision" type="xs:boolean" use="required" />
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="SpecialDiet" type="FacilitiesStructure">
+              <xs:annotation>
+                <xs:documentation>Information about special diets catered for by the provider. e.g. vegetarian</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="CulturalProvision" type="FacilitiesStructure">
+              <xs:annotation>
+                <xs:documentation>Information about cultural provision offered by the provider</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="WheelchairAccess" type="FacilitiesStructure">
+              <xs:annotation>
+                <xs:documentation>Information about wheelchair access offered by the provider</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Facilities" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional details outlining the facilities offered by the provider. e.g. pets</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="QualityAwards" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional details outlining any quality awards the provider has</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OtherInformation" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional further textual information about the provider</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Country" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional details about the country the provider record relates to</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CISID" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Optional unique identifier for the Children's Information Service responsible for the provider</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ModificationDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Optional date that the details of the provider were last modified</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="RegistrationDetails" type="RegistrationStructure">
+        <xs:annotation>
+          <xs:documentation>Details pertaining to a provider's registration. The absence of this denotes that the provider is unregistered.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CaterForOverEights" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Optional flag specifying whether the provider caters for children over eight years old</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ImmediateVacancies" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Optional flag specifying whether the provider has immediate vacancies</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="NotRegisteredUnderTwoHours" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Optional flag specifying whether the provider is not registered due to care only being offered for less than two hours per day. Note - this is used in Scotland only</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="RegistrationExempt" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Optional flag specifying whether the provider is exempt from registration. e.g. the provider being on a military base</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LinkedRegistration" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Links to associated provisions for this provider.  Data provided by Ofsted</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="QualityAssurance" type="QualityAssuranceStructure">
+        <xs:annotation>
+          <xs:documentation>Quality assurance details of the provision</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="FromOfsted" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Field to indicate whether the provision record has originated from Ofsted (true) or has the provision record orginated from a local authority as non-registered childcare (false).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OfstedURN" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Ofsted published unique reference number (URN) within the Children's Directorate. For information, historic URNs are numeric only while the newer URNs are 2 digit character prefix followed by 6 numerics.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:group name="eGMSGroup">
+    <xs:annotation>
+      <xs:documentation>eGMS metatdata</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DC.Title" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Title of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DC.Identifier">
+        <xs:annotation>
+          <xs:documentation>An unambiguous reference to the resource within a given context</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Href" type="xs:anyURI" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Description" type="DescriptionStructure">
+        <xs:annotation>
+          <xs:documentation>Description for the resource. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DCTerms.Audience" type="lg:SimpleLiteralStructure">
+        <xs:annotation>
+          <xs:documentation>SimpleLiteralStructure is the base type for the LGAL type. Thus a DCTerms.Audience instance element could hold a plain string, or cast it to an LGAL typed element.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DC.Language" type="xs:language">
+        <xs:annotation>
+          <xs:documentation>Language of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DC.Subject" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>SimpleLiteralStructure is the base type for the IPSV type. Thus a DC.Subject instance element could hold a plain string, or cast it to an IPSV typed element.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DC.Creator">
+        <xs:annotation>
+          <xs:documentation>An entity primarily responsible for making the content of the resource</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Href" type="xs:anyURI" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DC.Publisher">
+        <xs:annotation>
+          <xs:documentation>An entity responsible for making the resource available.  Mandatory element that represents the data owner/controller</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Href" type="xs:anyURI" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DC.Date.Created" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Date of creation of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DC.Date.Modified" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Date on which the resource was changed</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eGMS.Copyright" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Statement and identifier indicating the legal ownership and rights regarding use and re-use of all or part of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="eGMS.Keyword" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Keywords for the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <!--======================================-->
+  <!--Structures part of ProviderDetailStructure-->
+  <!--======================================-->
+  <xs:complexType name="ChildcareTypeStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for types of childcare available</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="ID" type="xs:int" use="required">
+          <xs:annotation>
+            <xs:documentation>A unique identifier for the childcare type</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ContactInformationStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for contact information</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContactName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional contact name for the contact information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TelephoneNumber" type="apd:TelephoneStructure">
+        <xs:annotation>
+          <xs:documentation>Telephone number for the contact information. Uses the TelephoneStructure type from the imported ContactTypes GovTalk schema</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="FaxNumber" type="apd:FaxStructure">
+        <xs:annotation>
+          <xs:documentation>Optional fax numbers for the contact information. Uses the FaxStructure type from the imported ContactTypes GovTalk schema</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PostalAddress" type="apd:UKAddressStructure">
+        <xs:annotation>
+          <xs:documentation>Postal address for the contact information. Uses the UKAddressStructure type from the imported AddressTypes GovTalk schema</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PostcodeOutcode" type="OutcodeType">
+        <xs:annotation>
+          <xs:documentation>Outcode portion of the postcode.  i.e. 'S2' of 'S2 4AN'  To be used when providers wish to have their provision address information withheld but still want the provision to be found via location based searches</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="EmailAddress" type="apd:EmailStructure">
+        <xs:annotation>
+          <xs:documentation>Optional email address for the contact information. Uses the EmailStructure type from the imported ContactTypes GovTalk schema</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="WebsiteAddress" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Optional website address for the contact information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChildcarePeriodListStructure">
+    <xs:annotation>
+      <xs:documentation>Broad periods of cahildcare offered by provider from Ofsted</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ChildcarePeriod" type="ChildcarePeriodType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ChildcarePeriodType">
+    <xs:annotation>
+      <xs:documentation>Type of period of child care such as "After school" or "More than 3 hours per day".  Changed from an enumeration to a string because these Ofsted labels are not fixed</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="ProvisionTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CCD">
+        <xs:annotation>
+          <xs:documentation>
+                        Childcare on Domestic Premises - childcare provider on domestic premises (working with three or more other people, including assistants on domestic premises)
+                    </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CCN">
+        <xs:annotation>
+          <xs:documentation>
+                        Childcare on non-Domestic Premises - childcare provider on non-domestic premises (working with three or more other people premises which are not domestic)
+                    </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CMR">
+        <xs:annotation>
+          <xs:documentation>
+                        Childminder - caring for children on domestic premises which are not the home of one of the children and working with no more than two other childminders or assistants
+                    </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HCR">
+        <xs:annotation>
+          <xs:documentation>
+                        Home Childcarer - caring for children wholly or mainly in the home of a child under care, and caring for children from no more than two families in the home of one of the children e.g. nannies, au pairs
+                    </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ChildcareAgeListStructure">
+    <xs:annotation>
+      <xs:documentation>Age ranges by registration type with maximum number limits</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ChildcareAge" type="ChildcareAgeStructure" />
+      <xs:element minOccurs="0" name="ChildNumberOverallLimit" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChildcareAgeStructure">
+    <xs:annotation>
+      <xs:documentation>An age range with optional number limit</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgeFrom" type="ChildcareAgeType" />
+      <xs:element name="AgeTo">
+        <xs:simpleType>
+          <xs:restriction base="ChildcareAgeType">
+            <xs:maxInclusive value="25" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ChildNumberLimit" type="xs:integer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ChildcareAgeType">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="25" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FacilitiesStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for facilities available</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="HasProvision" type="xs:boolean" use="required">
+          <xs:annotation>
+            <xs:documentation>Flag specifying whether this provision is offered</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!--======================================-->
+  <!--Registration related types-->
+  <!--======================================-->
+  <xs:complexType name="RegistrationStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for registration details</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="RegistrationDate" type="xs:date" />
+      <xs:element name="RegistrationConditions">
+        <xs:annotation>
+          <xs:documentation>Conditions attached to the registration.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="RegistrationCondition" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RegistrationTypes">
+        <xs:annotation>
+          <xs:documentation>One or more of EYR, CCR, VCR</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="3" name="RegistrationType" type="RegistrationTypeType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RegistrationStatus" type="RegistrationStatusDetailStructure">
+        <xs:annotation>
+          <xs:documentation>Defaults to ACTV (Active)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="LastInspection" type="InspectionStructure" />
+      <xs:element minOccurs="0" name="WelfareNoticeHistoryList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="WelfareNoticeDetail" type="WelfareNoticeDetailType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="RegistrationId" type="ChildCareReferenceNumber" use="required">
+      <xs:annotation>
+        <xs:documentation>Ofsted URN</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="ChildCareReferenceNumber">
+    <xs:annotation>
+      <xs:documentation>Ofsted unique RN</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="6" />
+      <xs:maxLength value="20" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RegistrationTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EYR">
+        <xs:annotation>
+          <xs:documentation>Early Years Register</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CCR">
+        <xs:annotation>
+          <xs:documentation>Compulsory Childcare Register</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VCR">
+        <xs:annotation>
+          <xs:documentation>Voluntary Childcare Register</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RegistrationStatusDetailStructure">
+    <xs:annotation>
+      <xs:documentation>Details of a single registration status</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="RegistrationStatus" type="RegistrationStatusType" />
+      <xs:element name="RegistrationStatusStartDate" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="RegistrationStatusType">
+    <xs:annotation>
+      <xs:documentation>Changed to a simple string as Ofsted is changing its status types</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="InspectionStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for a registration inspection</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="InspectionType" type="xs:string" />
+      <xs:element name="InspectionDate" type="xs:date" />
+      <xs:element name="InspectionOverallJudgementDescription" type="InspectionOverallJudgementDescriptionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="InspectionOverallJudgementDescriptionType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="80" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="WelfareNoticeHistoryListStructure">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WelfareNoticeDetail" type="WelfareNoticeDetailType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WelfareNoticeDetailType">
+    <xs:sequence>
+      <xs:element name="WelfareNoticeCategoryDescription" type="WelfareNoticeCategoryDescriptionType" />
+      <xs:element name="WelfareNoticeStartDate" type="xs:date" />
+      <xs:element minOccurs="0" name="WelfareNoticeEndDate" type="xs:date" />
+      <xs:element minOccurs="0" name="RegistrationSuspensionDetail" type="RegistrationSuspensionDetailType" />
+      <xs:element minOccurs="0" name="RegistrationCancellationDetail" type="RegistrationCancellationDetailType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WelfareNoticeCategoryDescriptionType">
+    <xs:annotation>
+      <xs:documentation>Description of the Ofsted Welfare Notice Category</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="80" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RegistrationCancellationDetailType">
+    <xs:sequence>
+      <xs:element name="NOIDate" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegistrationSuspensionDetailType">
+    <xs:sequence>
+      <xs:element name="SuspensionType" type="xs:string" />
+      <xs:element name="SuspensionStartDate" type="xs:date" />
+      <xs:element minOccurs="0" name="SuspensionEndDate" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ControlledListStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for controlled lists and taxonomies</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Id" type="xs:string" use="required" />
+        <xs:attribute name="ConceptId" type="xs:string" use="optional" />
+        <xs:attribute name="ItemName" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>Code of the controlled list</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="ListName" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>Name of the controlled list</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="HomeLocation" type="xs:anyURI" use="optional">
+          <xs:annotation>
+            <xs:documentation>URI of the controlled list</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DescriptionStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for description information about the provision. Description may be given in multiple formats but if a description is given then at least one of those descriptions must be of plain text. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DC.Description">
+        <xs:annotation>
+          <xs:documentation>Description in plain text. Formattype fixed as plain</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute fixed="plain" name="Format" use="required">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="plain" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DescriptionFormatted">
+        <xs:annotation>
+          <xs:documentation>Formatted description text. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Format" use="required">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="html" />
+                    <xs:enumeration value="xhtml" />
+                    <xs:enumeration value="bbcode" />
+                    <xs:enumeration value="structuredtext" />
+                    <xs:enumeration value="rest" />
+                    <xs:enumeration value="wiki" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+              <xs:attribute fixed="DC.Description" name="Refines" type="xs:NMTOKEN" use="required" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QualityAssuranceStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure that identifies the levels of quality assurance that have been undertaken by the data provider for this provision. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="QualityLevel">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="QualityStatus" type="ControlledListStructure">
+              <xs:annotation>
+                <xs:documentation>The level of quality assurance undertaken. Values taken from the Quality assurance levels controlled list. Default value = unknown</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="QualityStatusChangeDate" type="xs:dateTime">
+              <xs:annotation>
+                <xs:documentation>Date and time the status of the level of quality assurance was changed / added for this provisison</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Details" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Further details about the level of quality assurance for this provision</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="OutcodeType">
+    <xs:annotation>
+      <xs:documentation>Data structure for the outcode portion of the postcode</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{1,2}[0-9R][0-9A-Z]?" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,32 @@
+
+Got to line 151
+---
+
+ServiceDescription (ServiceStructure)
+	eGMSGroup
+		-ToDo
+	refinedeGMSGroup
+		-ToDo
+	SharedGroup
+		-ToDo
+	
+	WaitingList [string] Details of any waiting list for the service
+	CostDetails [CostStructure]
+		-ToDo
+	OfstedURN [string] - Creating a hierarchical relationship
+	ServiceProviderIdentifier [string]
+	ServiceProvider [0..n] ServiceProviderStructure]
+		eGMSGroup
+			-ToDo
+		refinedeGMSGroup
+			-ToDo
+		SharedGroup
+			-ToDo
+		ServiceIdentifier - ServiceIdentifier - List of unique id's of services
+                or
+		Services {1..n} - ServiceStructure - Optional Element Outlining the Services offered by prov.		ToDo
+
+		@CRBPolicy
+	@CRBPolicy
+End
+	

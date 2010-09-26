@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - Designer Edition 7.0.5.906 (http://www.liquid-technologies.com)-->
+<!-- 
+Modified: Provider Types Schema extended to cover Section 12 requirements of the Childcare Act 2006 as part of the ISPP project
+embracing standards initially incorporated by Opportunity Links (DCSF)
+
+Modified: 03/2008 - Hubert Matthews (DCSF)
+    Extended to cover Section 12 requirements of the Childcare Act 2006 as part of the ISPP project
+
+Modified: 07/2008 - Jonathan Tulley (DCSF)
+    Extended to cover Section 12 requirements of the Childcare Act 2006 as part of the ISPP project
+	
+Modified: 16/12/2008 - Andy Kerner (Tribal)
+  Amending Schema to correct ContactTypes TelephoneStructure issues
+  
+Modified: 08/01/2009 - Rob Graveley (Tribal)
+  Amending id and conceptid attribute in controlledliststructure to string datatype
+
+Modified: 02/09/2009 - Rob Graveley (Tribal)
+	Dc.type made string from controlledliststructure
+	FormatType restricted to plain text only
+	
+Modified: 09/03/2009 - Rob Graveley (Tribal)
+	DescriptionStructure introduced to allow for multiple description text formats whilst ensuring that at least one description will be of plain text
+	EligibilityCriteria changed from controlledliststructure to a string
+	Modified SpecialNeeds element node: addition of Experience, Confidence and Details elements. 
+	PublicationURL cardinality changed to allow multiple publication URL addresses
+	QualityAssurance element addded
+	OfstedURN element added
+	PPAYPCategory element added
+  
+-->
+<xs:schema xmlns="http://dcsf.gov.uk/XMLSchema/ServiceDirectory" xmlns:esd="http://www.esd.org.uk/standards" xmlns:bs7666="http://www.govtalk.gov.uk/people/bs7666" xmlns:apd="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://dcsf.gov.uk/XMLSchema/ServiceDirectory" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="PKHDAddressTypes.xsd" namespace="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" />
+  <xs:import schemaLocation="bs7666-v2-0.xsd" namespace="http://www.govtalk.gov.uk/people/bs7666" />
+  <xs:annotation>
+    <xs:documentation>Service data schema (initially developed by Opportunity Links and extended by DCSF) for passing structured service information</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:appinfo>
+			<Metadata xmlns="http://www.govtalk.gov.uk/metadata/egms">
+				<DC.Creator Href="mailto:parent.know-how@dcsf.gsi.gov.uk">DCSF</DC.Creator>
+				<DC.Date.Created Scheme="DCTERMS.W3CDTF">2006-07-06</DC.Date.Created>
+				<DC.Date.Modified Scheme="DCTERMS.W3CDTF">2008-05-13</DC.Date.Modified>
+				<DC.Description>Service and service provider types</DC.Description>
+				<DC.Format Scheme="http://www.iana.org/assignments/media-types/">text/xml</DC.Format>
+				<DC.Identifier Scheme="DCTERMS.URI">http://dcsf.gov.uk/XMLSchema/ServicesDirectory/ServiceTypes-v1-3c.xsd</DC.Identifier>
+				<DC.Language Scheme="DCTERMS.ISO639-2">eng</DC.Language>
+				<DC.Publisher Href="mailto:parent.know-how@dcsf.gsi.gov.uk">DCSF</DC.Publisher>
+				<DC.Relation.ConformsTo>http://www.w3.org/2001/XMLSchema</DC.Relation.ConformsTo>
+				<DC.Subject Scheme="eGMS.IPSV">Information and communication, Information management; Service Information</DC.Subject>
+				<DC.Title>Service Types 1.3c</DC.Title>
+				<DC.Type scheme="eGMS.TES">XML Schema</DC.Type>
+				<DC.Contributor>Hubert Matthews (DCSF)</DC.Contributor>
+				<eGMS.Copyright>DCSF 2008</eGMS.Copyright>
+				<eGMS.Project>Service Directory Webservice</eGMS.Project>
+				<eGMS.Status>Version 1.3c</eGMS.Status>
+			</Metadata>
+		</xs:appinfo>
+    <xs:documentation>The following external schemas are referenced (imported) by this schema</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation>Main service structures</xs:documentation>
+  </xs:annotation>
+  <xs:element name="ServiceDescription" type="ServiceStructure" />
+  <xs:complexType name="ServiceStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for the service details</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:group ref="eGMSGroup" />
+      <xs:group ref="RefinedeGMSGroup" />
+      <xs:group ref="SharedGroup" />
+      <xs:element minOccurs="0" name="WaitingList" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Details of any waiting list for the service</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CostDetails" type="CostStructure">
+        <xs:annotation>
+          <xs:documentation>Details of the cost of the service</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OfstedURN" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Ofsted URN used to identify a related ECD schema record. Ofsted published unique reference number (URN) within the Children's Directorate. For information, historic URNs are numeric only while the newer URNs are 2 digit character prefix followed by 6 numerics.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice>
+        <xs:annotation>
+          <xs:documentation>Choice between an ID for the service provider or the complete record</xs:documentation>
+        </xs:annotation>
+        <xs:element minOccurs="0" name="ServiceProviderIdentifier" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Unique identifier of the service provider</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="ServiceProvider" type="ServiceProviderStructure">
+          <xs:annotation>
+            <xs:documentation>Details about the provider of the service</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="CRBPolicy" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Whether the service has a CRB policy</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ServiceProviderStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for the service provider information</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:group ref="eGMSGroup" />
+      <xs:group ref="RefinedeGMSGroup" />
+      <xs:group ref="SharedGroup" />
+      <xs:element minOccurs="0" name="Services">
+        <xs:annotation>
+          <xs:documentation>Optional element outlining the services offered by the provider</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:choice>
+            <xs:annotation>
+              <xs:documentation>Choice between IDs for the services of the provider or the complete records</xs:documentation>
+            </xs:annotation>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="ServiceIdentifier" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>List of unique identifiers of services offered by the provider</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Service" type="ServiceStructure">
+              <xs:annotation>
+                <xs:documentation>List of services offered by the provider</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="CRBPolicy" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Whether the service provider has a CRB policy</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:annotation>
+    <xs:documentation>Types and groups</xs:documentation>
+  </xs:annotation>
+  <xs:simpleType name="NumberType">
+    <xs:annotation>
+      <xs:documentation>Contact number types</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="telephone" />
+      <xs:enumeration value="fax" />
+      <xs:enumeration value="mobile" />
+      <xs:enumeration value="minicom" />
+      <xs:enumeration value="freephone" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DayOfWeek">
+    <xs:annotation>
+      <xs:documentation>Days of the week</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Monday" />
+      <xs:enumeration value="Tuesday" />
+      <xs:enumeration value="Wednesday" />
+      <xs:enumeration value="Thursday" />
+      <xs:enumeration value="Friday" />
+      <xs:enumeration value="Saturday" />
+      <xs:enumeration value="Sunday" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:group name="eGMSGroup">
+    <xs:annotation>
+      <xs:documentation>Group for eGMS metadata</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DC.Contributor">
+        <xs:annotation>
+          <xs:documentation>An entity responsible for making contributions to the content of the resource</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Href" type="xs:anyURI" />
+              <xs:attribute name="Role" type="xs:token" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DC.Creator">
+        <xs:annotation>
+          <xs:documentation>An entity primarily responsible for making the content of the resource</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Href" type="xs:anyURI" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DC.Date.Created" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Date of creation of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DC.Date.Issued" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Date of publication of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DC.Date.Modified" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Date on which the resource was changed</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DC.Date.Valid">
+        <xs:annotation>
+          <xs:documentation>Dates between which the resource is valid</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Description" type="DescriptionStructure">
+        <xs:annotation>
+          <xs:documentation>Description for the resource.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DC.Identifier">
+        <xs:annotation>
+          <xs:documentation>An unambiguous reference to the resource within a given context</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Href" type="xs:anyURI" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="DC.Language" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>Language of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DC.Publisher">
+        <xs:annotation>
+          <xs:documentation>An entity responsible for making the resource available.  Mandatory element that describes who is the data owner/controller</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Href" type="xs:anyURI" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DC.Subject" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>Categories of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DC.Title" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Title of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DC.Type" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Type of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eGMS.Copyright" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Statement and identifier indicating the legal ownership and rights regarding use and re-use of all or part of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="eGMS.Keyword" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Keywords for the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="RefinedeGMSGroup">
+    <xs:annotation>
+      <xs:documentation>Group for eGMS metadata which refine existing elements</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AccessChannel">
+        <xs:annotation>
+          <xs:documentation>Access channels the resource is available through</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="ControlledListStructure">
+              <xs:attribute fixed="DC.Coverage" name="Refines" type="xs:NMTOKEN">
+                <xs:annotation>
+                  <xs:documentation>Refines DC.Coverage</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AreaCovered">
+        <xs:annotation>
+          <xs:documentation>The areas covered by the resource</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="ControlledListStructure">
+              <xs:attribute fixed="DC.Coverage" name="Refines" type="xs:NMTOKEN">
+                <xs:annotation>
+                  <xs:documentation>Refines DC.Coverage</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Availability" type="AvailabilityStructure">
+        <xs:annotation>
+          <xs:documentation>Availability of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="SuitableAgeRange" type="AgeRangeStructure">
+        <xs:annotation>
+          <xs:documentation>Details of the age ranges the resource is suitable for</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="SharedGroup">
+    <xs:annotation>
+      <xs:documentation>Group for elements shared between structures</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Accreditation" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>Accreditations or quality standards of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Contact" type="ContactStructure">
+        <xs:annotation>
+          <xs:documentation>Contacts for the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ContactDetails" type="ContactDetailsStructure">
+        <xs:annotation>
+          <xs:documentation>Contact details of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeliveryChannel" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>The delivery channels this resource can be delivered through</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Directions" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Directions to the location of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Facility" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>Facilities offered by the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LanguageSpoken" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>Languages spoken by operators of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="EligibilityCriteria" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Eligibility criteria of the resource. Changed to a free text string field due to the kinds of eligibility criteria varying so widely. A single controlled list would not be helpful.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ReferralCriteria" type="CriteriaStructure">
+        <xs:annotation>
+          <xs:documentation>Referral criteria of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ReferralProcedures" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Referral procedures of the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="SpecialProvisions" type="ProvisionStructure">
+        <xs:annotation>
+          <xs:documentation>Special provisions offered by the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TravelInformation" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Information regarding travel to and from the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DisabledAccess" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>What access is available for those with disabilities</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="LeisureCardInformation" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Information about acceptance of young person's leisure cards or similar</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PPAYPCategory" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>Category of Provision for Positive Activities for Young People. Controlled list of values.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Notes" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Additional information about the resource</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PublicationURL" type="xs:anyURI">
+        <xs:annotation>
+          <xs:documentation>Website address of associated publications</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="QualityAssurance">
+        <xs:annotation>
+          <xs:documentation>Quality assurance details of the provision</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="QualityAssuranceStructure" />
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:annotation>
+    <xs:documentation>Supporting structures</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="AddressStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for address information</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="apd:UKAddressStructure">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GridReference" type="bs7666:CoordinateStructure">
+            <xs:annotation>
+              <xs:documentation>Grid reference of the postal address</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AgeRangeStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for ages</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="From" type="AgeStructure">
+        <xs:annotation>
+          <xs:documentation>Age from</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="To" type="AgeStructure">
+        <xs:annotation>
+          <xs:documentation>Age to</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Details" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Textual information about age ranges</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute fixed="DCTERMS.Audience" name="Refines" type="xs:NMTOKEN">
+      <xs:annotation>
+        <xs:documentation>Refines DCTERMS.Audience</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="AgeStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for age ranges</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Years" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Age (in Years)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Months" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Age (in Months)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AvailabilityStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for availability information</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="StartDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Date and/or time service starts</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="EndDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Date and/or time service ends</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Period">
+        <xs:annotation>
+          <xs:documentation>Normal opening times</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="StartTime" type="xs:time">
+              <xs:annotation>
+                <xs:documentation>Time period starts</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="EndTime" type="xs:time">
+              <xs:annotation>
+                <xs:documentation>Time period ends</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="Day" type="DayOfWeek" use="required">
+            <xs:annotation>
+              <xs:documentation>Day of the week (add duplicates for multiple periods in a single day)</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Details" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Textual information about availability (for example, term-time or bank holidays)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute fixed="DC.Coverage" name="Refines" type="xs:NMTOKEN">
+      <xs:annotation>
+        <xs:documentation>Refines DC.Coverage</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ContactDetailsStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for contact details information</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" type="AddressStructure">
+        <xs:annotation>
+          <xs:documentation>Postal address of the contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactNumber">
+        <xs:annotation>
+          <xs:documentation>Contact numbers of the contact</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="apd:TelephoneStructure">
+              <xs:attribute name="Type" type="NumberType" use="required">
+                <xs:annotation>
+                  <xs:documentation>Type of the contact number</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="EmailAddress" type="apd:EmailStructure">
+        <xs:annotation>
+          <xs:documentation>Email address of the contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="WebsiteAddress" type="xs:anyURI">
+        <xs:annotation>
+          <xs:documentation>Website address of the contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContactStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for contact information</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Name of the contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Roles" type="RoleStructure">
+        <xs:annotation>
+          <xs:documentation>Roles of the contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ContactDetails" type="ContactDetailsStructure">
+        <xs:annotation>
+          <xs:documentation>Contact details of the contact</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="MainContact" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Whether the contact is the main contact</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ControlledListStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for controlled lists and taxonomies</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Id" type="xs:string" use="required" />
+        <xs:attribute name="ConceptId" type="xs:string" use="optional" />
+        <xs:attribute name="ItemName" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>Code of the controlled list</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="ListName" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>Name of the controlled list</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="HomeLocation" type="xs:anyURI" use="optional">
+          <xs:annotation>
+            <xs:documentation>URI of the controlled list</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CostStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for costs</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Costs" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Main cost details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OtherCosts" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Additional cost details such as discounts</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ContactForCosts" type="xs:boolean" use="optional">
+      <xs:annotation>
+        <xs:documentation>Whether to contact for cost information</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="CriteriaStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for criteria</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Criteria" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>Criteria entries from a defined list</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Details" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Criteria details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProvisionStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for provisions</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="WheelchairAccess">
+        <xs:annotation>
+          <xs:documentation>Whether wheelchair access is available</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="HasProvision" type="xs:boolean" use="required">
+                <xs:annotation>
+                  <xs:documentation>Whether the service offers this provision</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="CulturalProvision">
+        <xs:annotation>
+          <xs:documentation>Whether cultural provision is offered</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="HasProvision" type="xs:boolean" use="required">
+                <xs:annotation>
+                  <xs:documentation>Whether the service offers this provision</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="SpecialDiet">
+        <xs:annotation>
+          <xs:documentation>Whether special diets are catered for</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="HasProvision" type="xs:boolean" use="required">
+                <xs:annotation>
+                  <xs:documentation>Whether the service offers this provision</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="SpecialNeeds">
+        <xs:annotation>
+          <xs:documentation>Whether special needs are catered for</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Experience" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Details of any experience the provider  of the provision has working with children with special needs</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Confidence" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Details about the confidence the provider of the provision has working with children with special needs</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Details" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Details about special needs provision of the provider</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="HasProvision" type="xs:boolean" use="required">
+            <xs:annotation>
+              <xs:documentation>Whether the service offers this provision</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Details" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Textual information about provisions</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoleStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for roles</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Role" type="ControlledListStructure">
+        <xs:annotation>
+          <xs:documentation>Role entries from a defined list</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Details" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Role details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DescriptionStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure for description information about the provision. Description may be given in multiple formats but if a description is given then at least one of those descriptions must be of plain text. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DC.Description">
+        <xs:annotation>
+          <xs:documentation>Description in plain text. Formattype fixed as plain</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute fixed="plain" name="Format" use="required">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="plain" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DescriptionFormatted">
+        <xs:annotation>
+          <xs:documentation>Formatted description text. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="Format" use="required">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="html" />
+                    <xs:enumeration value="xhtml" />
+                    <xs:enumeration value="bbcode" />
+                    <xs:enumeration value="structuredtext" />
+                    <xs:enumeration value="rest" />
+                    <xs:enumeration value="wiki" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+              <xs:attribute fixed="DC.Description" name="Refines" type="xs:NMTOKEN" use="required" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QualityAssuranceStructure">
+    <xs:annotation>
+      <xs:documentation>Data structure that identifies the levels of qualtiy assurance that have been undertaken by the data provider for this provision. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="QualityLevel">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="QualityStatus" type="ControlledListStructure">
+              <xs:annotation>
+                <xs:documentation>The level of quality assurance undertaken. Values taken from the Quality assurance levels controlled list. Default value = unknown</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="QualityStatusChangeDate" type="xs:dateTime">
+              <xs:annotation>
+                <xs:documentation>Date and time the status of the level of quality assurance was changed / added for this provisison</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Details" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Further details about the level of quality assurance for this provision</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

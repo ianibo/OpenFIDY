@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProviderDescription 
+xmlns="http://dcsf.gov.uk/XMLSchema/Childcare" 
+xmlns:LG="http://www.esd.org.uk/standards" 
+xmlns:n3="http://www.govtalk.gov.uk/metadata/egms" 
+xmlns:core="http://www.govtalk.gov.uk/core" 
+xmlns:n2="http://www.govtalk.gov.uk/CM/gms-xs" 
+xmlns:apd="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" 
+xmlns:bs7666="http://www.govtalk.gov.uk/people/bs7666" 
+xmlns:gms="http://www.govtalk.gov.uk/CM/gms" 
+xsi:schemaLocation="http://dcsf.gov.uk/XMLSchema/Childcare  http://www.ispp-aggregator.org.uk/f1les/ISPP/docs/schemas/v6/ProviderTypes-v1-1e.xsd"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <DC.Title>Tribal Test02 ECD Valid V6 record</DC.Title>
+  <DC.Identifier Href="http://uri">TT03_01_V6</DC.Identifier>
+  <Description>
+	<DC.Description Format="plain">Parents, Guardians</DC.Description>
+	<!--DescriptionFormatted Refines="DC.Description" Format="html">
+		%3CH1%3ETribal test ECD document to test V5 schema changes%3C%2FH1%3E %3CP%3EContains all the new elements and data to test all changes for V5 schema%3C%2FP%3E
+     </DescriptionFormatted-->
+  </Description>
+  <DC.Language>en</DC.Language>
+  <DC.Subject ListName="ISPP-001a-M" ItemName="Careers" Id="001-8d">Careers</DC.Subject>
+  <DC.Creator Href="http://www.tribalgroup.co.uk">Tribal01</DC.Creator>
+  <DC.Publisher Href="http://www.tribalgroup.co.uk">Tribal</DC.Publisher>
+  <DC.Date.Created>2008-12-04T22:26:17Z</DC.Date.Created>
+  <DC.Date.Modified>2008-12-04T22:26:17Z</DC.Date.Modified>
+  <eGMS.Copyright>Tribal</eGMS.Copyright>
+  <eGMS.Keyword>Sheffield Childminder Nursery</eGMS.Keyword>
+  <ProviderDetails>
+    <ProviderName>Tribal ECD</ProviderName>
+    <ConsentVisibleAddress>true</ConsentVisibleAddress>
+    <SettingDetails>
+      <ContactName />
+      <!--<TelephoneNumber TelUse="work" TelMobile="yes" TelPreferred="yes">
+        <apd:TelNationalNumber>0114-1111111</apd:TelNationalNumber>
+      </TelephoneNumber>-->
+      <FaxNumber FaxUse="work" FaxMobile="yes" FaxPreferred="yes">
+        <apd:FaxNationalNumber>0114-1111112</apd:FaxNationalNumber>
+      </FaxNumber>
+      <PostalAddress>
+        <apd:A_5LineAddress>
+          <apd:Line>55 St Mary's Court</apd:Line>
+          <apd:Line>St Mary's Road</apd:Line>
+          <apd:Line>Sheffield</apd:Line>
+          <apd:Line>South Yorkshire</apd:Line>
+          <apd:PostCode>S34 2UG</apd:PostCode>
+        </apd:A_5LineAddress>
+        <apd:UniquePropertyReferenceNumber>4567</apd:UniquePropertyReferenceNumber>
+        <apd:SortCode>88009</apd:SortCode>
+      </PostalAddress>
+      <EmailAddress EmailPreferred="yes">
+        <apd:EmailAddress>emily.tredoux@tribaltechnology.co.uk</apd:EmailAddress>
+      </EmailAddress>
+      <WebsiteAddress>www.bbc.co.uk</WebsiteAddress>
+    </SettingDetails>
+    <ContactDetails>
+    <!--SettingDetails-->
+      <ContactName />
+      <TelephoneNumber TelPreferred="yes" TelMobile="yes" TelUse="home">
+        <apd:TelNationalNumber>0114-1111111</apd:TelNationalNumber>
+      </TelephoneNumber>
+      <FaxNumber FaxPreferred="yes" FaxMobile="yes" FaxUse="home">
+        <apd:FaxNationalNumber>0114-1111112</apd:FaxNationalNumber>
+      </FaxNumber>
+      <PostalAddress>
+        <apd:A_5LineAddress>
+          <apd:Line>55 St Mary's Court</apd:Line>
+          <apd:Line>St Mary's Road</apd:Line>
+          <!--<apd:Line>Sheffield</apd:Line>
+          <apd:Line>South Yorkshire</apd:Line>-->
+          <apd:PostCode>S2 3AN</apd:PostCode>
+        </apd:A_5LineAddress>
+        <apd:UniquePropertyReferenceNumber>1234</apd:UniquePropertyReferenceNumber>
+        <apd:SortCode>98765</apd:SortCode>
+      </PostalAddress>
+      <EmailAddress EmailPreferred="yes">
+        <apd:EmailAddress>emily.tredoux@tribaltechnology.co.uk</apd:EmailAddress>
+      </EmailAddress>
+      <WebsiteAddress>www.bbc.co.uk</WebsiteAddress>
+    </ContactDetails>
+    <ChildcareType>nursery</ChildcareType>
+    <!--<ProvisionType>CCD</ProvisionType>-->
+    <ChildcarePeriods>
+      <ChildcarePeriod />
+    </ChildcarePeriods>
+    <ChildcareTimes>
+      <Times>07:45 to 16:45</Times>
+      <OtherHours>None</OtherHours>
+      <Availability>2009 - 2010</Availability>
+    </ChildcareTimes>
+    <TimesOfFundedPlaces>
+      <Times>07:45 to 16:45</Times>
+      <OtherHours>none</OtherHours>
+		<Availability>2009</Availability>
+    </TimesOfFundedPlaces>
+    <CostDetails ContactForCosts="true">
+      <Costs>£35.00 per week</Costs>
+      <OtherCosts>There is a cost of £5.00 per week for pickup fees</OtherCosts>
+    </CostDetails>
+    <Pickups HasProvision="true">
+      <SchoolList>st Catherines, St Josephs, Firshill</SchoolList>
+      <Details>Minibus - max 8 children</Details>
+    </Pickups>
+    <FutureVacancyDetails ContactForVacancies="false">
+      <VacancyInformation>please contact us for vacancy inforrmton</VacancyInformation>
+      <TotalVacancies>2</TotalVacancies>
+    </FutureVacancyDetails>
+    <SpecialProvisions>
+      <SpecialNeeds HasProvision="true">
+        <Experience>5 years</Experience>
+        <Confidence>rating 8</Confidence>
+        <Details>Confidence rating to be reviewed May 2009 (expecting to get rating 8)
+</Details>
+      </SpecialNeeds>
+      <SpecialDiet HasProvision="true">Cultural Provision details go here
+</SpecialDiet>
+      <CulturalProvision HasProvision="true">Special Diet details go here
+</CulturalProvision>
+      <WheelchairAccess HasProvision="true">Wheelchair access details go here
+</WheelchairAccess>
+    </SpecialProvisions>
+    <Facilities>Disabled bathroom, disabled work space</Facilities>
+    <QualityAwards>city council award, 2007, 2008</QualityAwards>
+    <OtherInformation>With your guidance as a parent we can accomodate most children, please talk to us.</OtherInformation>
+    <Country>England</Country>
+    <CISID>007</CISID>
+    <ModificationDate>2008-12-04</ModificationDate>
+    <RegistrationDetails RegistrationId="286551090">
+      <RegistrationDate>2008-12-04</RegistrationDate>
+      <RegistrationConditions>
+        <RegistrationCondition>Condition 1</RegistrationCondition>
+        <RegistrationCondition>Condition 2</RegistrationCondition>
+        <RegistrationCondition>Condition 3</RegistrationCondition>
+      </RegistrationConditions>
+      <RegistrationTypes>
+        <RegistrationType>VCR</RegistrationType>
+      </RegistrationTypes>
+      <RegistrationStatus>
+        <RegistrationStatus>ACTV</RegistrationStatus>
+        <RegistrationStatusStartDate>2008-12-04</RegistrationStatusStartDate>
+      </RegistrationStatus>
+      <!--<LastInspection>
+        <InspectionType>OFSTED</InspectionType>
+        <InspectionDate>2008-05-13</InspectionDate>
+        <InspectionOverallJudgementDescription>Rating 8 - High Pass</InspectionOverallJudgementDescription>
+      </LastInspection>-->
+      <!--<WelfareNoticeHistoryList>
+        <WelfareNoticeDetail>
+          <WelfareNoticeCategoryDescription>SEN funding</WelfareNoticeCategoryDescription>
+          <WelfareNoticeStartDate>2008-01-14</WelfareNoticeStartDate>
+          <WelfareNoticeEndDate>2009-01-11</WelfareNoticeEndDate>
+          <RegistrationSuspensionDetail>
+            <SuspensionType>type 1</SuspensionType>
+            <SuspensionStartDate>2008-12-22</SuspensionStartDate>
+            <SuspensionEndDate>2009-01-04</SuspensionEndDate>
+          </RegistrationSuspensionDetail>
+          <RegistrationCancellationDetail>
+            <NOIDate>2009-01-01</NOIDate>
+          </RegistrationCancellationDetail>
+        </WelfareNoticeDetail>
+        <WelfareNoticeDetail>
+          <WelfareNoticeCategoryDescription>SEN funding too</WelfareNoticeCategoryDescription>
+          <WelfareNoticeStartDate>2008-12-04</WelfareNoticeStartDate>
+          <WelfareNoticeEndDate>2008-12-04</WelfareNoticeEndDate>
+          <RegistrationSuspensionDetail>
+            <SuspensionType>type 2</SuspensionType>
+            <SuspensionStartDate>2008-12-04</SuspensionStartDate>
+            <SuspensionEndDate>2008-12-04</SuspensionEndDate>
+          </RegistrationSuspensionDetail>
+          <RegistrationCancellationDetail>
+            <NOIDate>2008-12-04</NOIDate>
+          </RegistrationCancellationDetail>
+        </WelfareNoticeDetail>
+      </WelfareNoticeHistoryList>-->
+    </RegistrationDetails>
+    <CaterForOverEights>true</CaterForOverEights>
+    <ImmediateVacancies>true</ImmediateVacancies>
+    <NotRegisteredUnderTwoHours>false</NotRegisteredUnderTwoHours>
+    <RegistrationExempt>false</RegistrationExempt>
+    <LinkedRegistration></LinkedRegistration>
+	<QualityAssurance>
+			<QualityLevel>
+				<QualityStatus Id="2" ItemName="Service details confirmed" ListName="QualityAssurance-1.0">Service details confirmed</QualityStatus>
+				<QualityStatusChangeDate>2009-03-18T08:30:00Z</QualityStatusChangeDate>
+				<Details>some details about the quality status checks performed</Details>
+			</QualityLevel>
+		</QualityAssurance>
+		<FromOfsted>true</FromOfsted>
+		<OfstedURN>AA-098765</OfstedURN>
+  </ProviderDetails>
+</ProviderDescription>

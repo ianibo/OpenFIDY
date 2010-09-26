@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceDescription 
+			xmlns="http://dcsf.gov.uk/XMLSchema/ServiceDirectory" 
+			xmlns:rxr="http://ilrt.org/discovery/2004/03/rxr/" 
+			xmlns:esd="http://www.esd.org.uk/standards" 
+			xmlns:core="http://www.govtalk.gov.uk/core" 
+			xmlns:n2="http://www.govtalk.gov.uk/metadata/egms" 
+			xmlns:apd="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" 
+			xmlns:bs7666="http://www.govtalk.gov.uk/people/bs7666" 
+			xsi:schemaLocation="http://dcsf.gov.uk/XMLSchema/ServiceDirectory  http://www.ispp-aggregator.org.uk/f1les/ISPP/docs/schemas/v5/ServiceTypes-v1-3c.xsd" 
+			CRBPolicy="true"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <DC.Contributor Href="http://www.tribalgroup.co.uk" Role="Supervisor">emily tredoux</DC.Contributor>
+  <DC.Creator Href="http://www.tribalgroup.co.uk">Tribal</DC.Creator>
+  <DC.Date.Created>2008-12-03T16:52:26</DC.Date.Created>
+  <DC.Date.Issued>2008-12-03T16:52:26</DC.Date.Issued>
+  <DC.Date.Modified>2008-12-03T16:52:26</DC.Date.Modified>
+  <DC.Date.Valid>
+    <StartDate>2008-12-03T16:52:26</StartDate>
+    <EndDate>2009-12-03T16:52:26</EndDate>
+  </DC.Date.Valid>
+	<Description>
+		<DC.Description Format="plain">Tribal Test02 FSD record October</DC.Description>
+	</Description>
+  <DC.Identifier Href="http://www.tribalgroup.co.uk">TT03_V5_01</DC.Identifier>
+  <DC.Language ListName="Languages" ItemName="english" Id="1">english</DC.Language>
+  <DC.Publisher>Tribal</DC.Publisher>
+  <DC.Subject ListName="ISPP-001a-M" ItemName="Careers" Id="001-8d">Careers</DC.Subject>
+  <DC.Title>Tribal Test V6 02 FSD</DC.Title>
+  <DC.Type>type 1</DC.Type>
+  <eGMS.Copyright>Tribal</eGMS.Copyright>
+  <eGMS.Keyword>swimming sheffield childminder</eGMS.Keyword>
+  <AreaCovered ListName="Spatial Levels 1.0" ItemName="Region" Id="3">Region</AreaCovered>
+  <Availability Refines="DC.Coverage">
+    <StartDateTime>2002-03-01T00:00:00</StartDateTime>
+    <EndDateTime>2009-03-01T00:00:00</EndDateTime>
+		 <Period Day="Monday">
+     		<StartTime> 12:30:00Z</StartTime>
+      		<EndTime>14:45:00Z</EndTime>
+    	</Period>
+		 <Period Day="Tuesday">
+     		<StartTime> 12:30:00Z</StartTime>
+      		<EndTime>14:45:00Z</EndTime>
+    	</Period>
+		 <Period Day="Wednesday">
+     		<StartTime> 12:30:00Z</StartTime>
+      		<EndTime>14:45:00Z</EndTime>
+    	</Period>
+		 <Period Day="Thursday">
+     		<StartTime> 12:30:00Z</StartTime>
+      		<EndTime>14:45:00Z</EndTime>
+    	</Period>
+		 <Period Day="Friday">
+     		<StartTime> 12:30:00Z</StartTime>
+      		<EndTime>14:45:00Z</EndTime>
+    	</Period>
+	<Details>closed over christmas</Details>
+  </Availability>
+  <SuitableAgeRange Refines="DCTERMS.Audience">
+    <From>
+      <Years>5</Years>
+      <Months>6</Months>
+    </From>
+    <To>
+      <Years>7</Years>
+      <Months>7</Months>
+    </To>
+    <Details>no youngsters</Details>
+  </SuitableAgeRange>
+  <Accreditation ListName="Accreditation-1.0" ItemName="Local Award" Id="8" >Local Award</Accreditation>
+  <Contact MainContact="true">
+    <Name>Tribal Tester01</Name>
+	<Roles>
+    <Role ListName="Role 1.0" ItemName="Council" Id="4">Council</Role>
+	<Details>Supervisory role</Details>
+	</Roles>
+    <ContactDetails>
+      <Address>
+        <apd:A_5LineAddress>
+          <apd:Line>55 St. Mary Road</apd:Line>
+          <apd:Line>St Mary's Gate</apd:Line>
+          <apd:Line>Sheffield</apd:Line>
+          <apd:Line>S.Yorkshire</apd:Line>
+          <apd:PostCode>S32 4AN</apd:PostCode>
+        </apd:A_5LineAddress>
+      </Address>
+      <ContactNumber Type="telephone" TelPreferred="yes" TelMobile="yes" TelUse="work">
+        <apd:TelNationalNumber>01142000000</apd:TelNationalNumber>
+      </ContactNumber>
+	<ContactNumber Type="telephone" TelPreferred="no" TelMobile="yes" TelUse="home">
+        <apd:TelNationalNumber>01142111111</apd:TelNationalNumber>
+      </ContactNumber>
+      <EmailAddress EmailPreferred="yes" EmailUsage="work">
+        <apd:EmailAddress>emily.tredoux@tribaltechnology.co.uk</apd:EmailAddress>
+      </EmailAddress>
+      <WebsiteAddress>www.tribal.co.uk</WebsiteAddress>
+    </ContactDetails>
+  </Contact>
+  <ContactDetails>
+    <Address>
+      <apd:BS7666Address>
+        <bs7666:SAON>
+          <bs7666:Description>55 St Mary's Court</bs7666:Description>
+        </bs7666:SAON>
+        <bs7666:PAON>
+          <bs7666:Description>St Mary's Road</bs7666:Description>
+        </bs7666:PAON>
+        <bs7666:StreetDescription>First on the left</bs7666:StreetDescription>
+        <bs7666:UniqueStreetReferenceNumber>0123</bs7666:UniqueStreetReferenceNumber>
+        <bs7666:Locality>Sheffield City Centre</bs7666:Locality>
+        <bs7666:Town>Sheffield</bs7666:Town>
+        <bs7666:AdministrativeArea>South Yorkshire</bs7666:AdministrativeArea>
+        <bs7666:PostTown>Sheffield</bs7666:PostTown>
+        <bs7666:PostCode>S2 4AN</bs7666:PostCode>
+        <bs7666:UniquePropertyReferenceNumber>4567</bs7666:UniquePropertyReferenceNumber>
+      </apd:BS7666Address>
+      <apd:UniquePropertyReferenceNumber>4567</apd:UniquePropertyReferenceNumber>
+      <apd:SortCode>88009</apd:SortCode>
+    </Address>
+    <ContactNumber Type="telephone" TelPreferred="yes" TelMobile="yes" TelUse="work">
+      <apd:TelNationalNumber>01111111111</apd:TelNationalNumber>
+      <apd:TelExtensionNumber>123</apd:TelExtensionNumber>
+      <apd:TelCountryCode>044</apd:TelCountryCode>
+    </ContactNumber>
+    <ContactNumber Type="mobile" TelPreferred="no" TelMobile="yes" TelUse="work">
+      <apd:TelNationalNumber>07771111111</apd:TelNationalNumber>
+      <apd:TelExtensionNumber>123</apd:TelExtensionNumber>
+      <apd:TelCountryCode>044</apd:TelCountryCode>
+    </ContactNumber>
+    <ContactNumber Type="fax" TelPreferred="no" TelMobile="yes" TelUse="work">
+      <apd:TelNationalNumber>01111111112</apd:TelNationalNumber>
+      <apd:TelExtensionNumber>123</apd:TelExtensionNumber>
+      <apd:TelCountryCode>044</apd:TelCountryCode>
+    </ContactNumber>
+    <EmailAddress EmailPreferred="yes" EmailUsage="work">
+      <apd:EmailAddress>emily.tredoux@tribalgroup.co.uk</apd:EmailAddress>
+    </EmailAddress>
+    <WebsiteAddress>www.bbc.co.uk</WebsiteAddress>
+  </ContactDetails>
+  <DeliveryChannel ListName="LGCHL-1.01" ItemName="Post" Id="9">Post</DeliveryChannel>
+  <Facility ListName="Facility 1.0" ItemName="CCTV" Id="3">CCTV</Facility>
+  <LanguageSpoken ListName="ISO 639-1" ItemName="English" Id="en">English</LanguageSpoken>
+	<EligibilityCriteria>
+		Free text details of Eligibility Criteria because no one could decide what the list should be
+	</EligibilityCriteria>
+  <ReferralCriteria>
+    <Criteria ListName="ReferralCriteria 1.0" ItemName="Self referral" Id="8">Self referral</Criteria>
+  </ReferralCriteria>
+  <ReferralProcedures>Via tribal testing services</ReferralProcedures>
+  <SpecialProvisions>
+    	<WheelchairAccess HasProvision="true">Wheelchair access details go here</WheelchairAccess>
+    	<CulturalProvision HasProvision="true">Cultural Provision details go here</CulturalProvision>
+   		<SpecialDiet HasProvision="true">Special Diet details go here</SpecialDiet>
+   		<SpecialNeeds HasProvision="true">
+			<Experience>5 years</Experience>
+			<Confidence>very confident</Confidence>
+			<Details>Confidence rating to be reviewed May 2009 (expecting to get rating 8)</Details>
+		</SpecialNeeds>
+   		<Details>Details for what, against what?</Details>
+  </SpecialProvisions>
+  <TravelInformation>Travel Info goes here</TravelInformation>
+  <DisabledAccess>Disabled Access info goes here</DisabledAccess>
+  <LeisureCardInformation>Leaisure card info goes here</LeisureCardInformation>
+  <Notes>This test is to test valid xml created via FSDForm Tool.</Notes>
+  <PublicationURL>www.nslc.co.uk</PublicationURL>
+  <PublicationURL>www.tribalgroup.co.uk</PublicationURL>
+  <QualityAssurance>
+		<QualityLevel>
+			<QualityStatus Id="2" ItemName="Service details confirmed" ListName="QualityAssurance-1.0">Service details confirmed</QualityStatus>
+			<QualityStatusChangeDate>2009-03-18T08:30:00Z</QualityStatusChangeDate>
+			<Details>some details about the quality status checks performed</Details>
+		</QualityLevel>
+  </QualityAssurance>
+  <WaitingList>There is a waiting list of three months</WaitingList>
+<CostDetails>
+      <!--ContactForCosts>true</ContactForCosts-->
+      <Costs>35.00 per week</Costs>
+      <OtherCosts>There is a cost of 5.00 per week for pickup fees</OtherCosts>
+    </CostDetails>
+  <ServiceProviderIdentifier>TT03</ServiceProviderIdentifier>
+</ServiceDescription>
